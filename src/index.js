@@ -55,17 +55,20 @@ function Content() {
   return (
     <>
       <Block factor={1} offset={0}>
-        <Block factor={1.2}>
-          <Text left size={w * 0.08} position={[-w / 3.2, 0.5, -1]} color="#d40749">
-            MOKSHA
+        <Block factor={1.2} style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
+          <Text left size={w * 0.05} position={[w*-1.5 / 3.2, 2.5, -1]} color="#d4bc07">
+            OHMIO BROADCAST
+          </Text>
+          <Text left size={w * 0.05} position={[w*-1 / 3.2, 0.5, -1]} color="#afafaf">
+            NAB SHOW 2023
           </Text>
         </Block>
         <Block factor={1.0}>
-          <Dom position={[-w / 3.2, -w * 0.08 + 0.25, -1]}>It was the year 2076.{mobile ? <br /> : " "}The substance had arrived.</Dom>
+          <Dom position={[-w / 3.2, -w * 0.08 + 0.25, -1]}>Introducing{mobile ? <br /> : " "}the future of Broadcast industry empowering Blockchain Technology</Dom>
         </Block>
       </Block>
       <Block factor={1.2} offset={5.7}>
-        <MultilineText top left size={w * 0.15} lineHeight={w / 5} position={[-w / 3.5, 0, -1]} color="#2fe8c3" text={"four\nzero\nzero"} />
+        <MultilineText top left size={w * 0.15} lineHeight={w / 5} position={[-w*1.7 / 3.5, 0, -1]} color="#2fe8c3"  text={"Broadcast\nWeb 3.0\nIoT"} />
       </Block>
       {state.paragraphs.map((props, index) => (
         <Paragraph key={index} index={index} {...props} image={images[index]} />
@@ -76,8 +79,8 @@ function Content() {
         </Block>
       ))}
       <Block factor={1.25} offset={8}>
-        <Dom className="bottom-left" position={[-canvasWidth / 2, -canvasHeight / 2, 0]}>
-          Culture is not your friend.
+        <Dom className="bottom-left" position={[-canvasWidth / 2, -canvasHeight / 2, 0]} style={{color:'white'}}>
+          Broadcast Powered by Web 3.0
         </Dom>
       </Block>
     </>
@@ -103,26 +106,32 @@ function App() {
         ))}
       </div>
       <div className="frame">
-        <h1 className="frame__title">Scroll, Refraction and Shader Effects</h1>
+        <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
+        <img alt="logoohmio" src="/moneda.png" style={{width:'3rem', marginRight:'1rem'}} />
+
+        <h1 className="frame__title" style={{color:'white'}}>OHMIO BROADCAST at NAB Event 2023</h1>
+
+        </div>
         <div className="frame__links">
-          <a className="frame__link" href="http://tympanus.net/Tutorials/PhysicsMenu/">
-            Previous demo
+
+          <a className="frame__link" href="https://ohmiobroadcast.io/" style={{color:'white'}}>
+            Home
           </a>
-          <a className="frame__link" href="https://tympanus.net/codrops/?p=45441">
-            Article
+          <a className="frame__link" href="#rewards" style={{color:'white'}}>
+            Rewards
           </a>
-          <a className="frame__link" href="https://github.com/drcmda/the-substance">
-            GitHub
+          <a className="frame__link" href="#contact" style={{color:'white'}}>
+            Contact
           </a>
         </div>
-        <div className="frame__nav">
-          <a className="frame__link" href="#00" children="intro" />
-          <a className="frame__link" href="#01" children="01" />
-          <a className="frame__link" href="#02" children="02" />
-          <a className="frame__link" href="#03" children="03" />
-          <a className="frame__link" href="#04" children="04" />
-          <a className="frame__link" href="#05" children="05" />
-          <a className="frame__link" href="#07" children="06" />
+        <div className="frame__nav" >
+          <a className="frame__link" href="#00" children="intro" style={{color:'white'}}/>
+          <a className="frame__link" href="#01" children="01" style={{color:'white'}}/>
+          <a className="frame__link" href="#02" children="02" style={{color:'white'}}/>
+          <a className="frame__link" href="#03" children="03" style={{color:'white'}}/>
+          <a className="frame__link" href="#04" children="04" style={{color:'white'}}/>
+          <a className="frame__link" href="#05" children="05" style={{color:'white'}}/>
+          <a className="frame__link" href="#07" children="06" style={{color:'white'}}/>
         </div>
       </div>
     </>
