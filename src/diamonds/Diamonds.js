@@ -7,10 +7,11 @@ import BackfaceMaterial from "./BackfaceMaterial"
 import RefractionMaterial from "./RefractionMaterial"
 import { useBlock } from "../blocks"
 import state from "../store"
+import diamondGLB from './diamond.glb'
 
 const dummy = new Object3D()
 export default function Diamonds() {
-  const gltf = useLoader(GLTFLoader, "./diamond.glb")
+  const gltf = useLoader(GLTFLoader, diamondGLB)
   useMemo(() => gltf.scene.children[0].geometry.center(), [])
 
   const { size, gl, scene, camera, clock } = useThree()
