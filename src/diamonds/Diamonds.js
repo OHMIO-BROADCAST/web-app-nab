@@ -10,7 +10,20 @@ import state from "../store"
 
 const dummy = new Object3D()
 export default function Diamonds() {
-  const gltf = useLoader(GLTFLoader, '/diamond.glb')
+
+  const headers = new Headers();
+  headers.append('Content-Type', 'model/gltf+json');
+  const options = { headers: headers };
+
+const [gltf, error] = useLoader(GLTFLoader, '/diamond.glb', loader => {
+  loader.load('/diamond.glb', gltf => {
+    // ...
+  }, undefined, error => {
+    console.error(error);
+  }, options);
+});
+  
+  
   useMemo(() => gltf.scene.children[0].geometry.center(), [])
 
   const { size, gl, scene, camera, clock } = useThree()
