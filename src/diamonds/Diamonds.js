@@ -12,8 +12,21 @@ import state from "../store"
 const dummy = new Object3D()
 export default function Diamonds() {
 
+
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'diamond.glb', true);
+xhr.responseType = 'arraybuffer';
+xhr.setRequestHeader('Content-Type', 'application/octet-stream');
+xhr.onload = function (e) {
+  var arrayBuffer = xhr.response;
+  // do something with the arrayBuffer, such as passing it to GLTFLoader.parse
+  console.log(arrayBuffer)
+};
+xhr.send();
+
+
+
   const headers = new Headers();
-  //headers.append('Content-Type', 'model/gltf+json');
   headers.append('Content-Type', 'application/octet-stream');
   headers.append('Accept', 'application/octet-stream');
 
