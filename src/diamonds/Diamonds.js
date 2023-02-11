@@ -14,8 +14,8 @@ export default function Diamonds() {
 
   const headers = new Headers();
   //headers.append('Content-Type', 'model/gltf+json');
-  headers.append('Content-Type', 'model/gltf+json');
-  headers.append('Accept', 'model/gltf+json');
+  headers.append('Content-Type', 'application/octet-stream');
+  headers.append('Accept', 'application/octet-stream');
 
   const options = { headers: headers };
   
