@@ -1,5 +1,5 @@
 import { WebGLRenderTarget, Object3D } from "three"
-import React, { useRef, useMemo } from "react"
+import React, { useRef, useMemo, useEffect, useState } from "react"
 import { useLoader, useThree, useFrame } from "react-three-fiber"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import lerp from "lerp"
@@ -10,39 +10,32 @@ import state from "../store"
 
 
 const dummy = new Object3D()
+function useGLTFLoader(url) {
+  const [gltf, error] = useLoader(GLTFLoader, url);
+  return [gltf, error];
+}
+
 export default function Diamonds() {
 
+const [arrayBuffer, setArrayBuffer] = useState(null);
+  useEffect(() => {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'diamond.glb', true);
+    xhr.responseType = 'arraybuffer';
+    xhr.setRequestHeader('Content-Type', 'application/octet-stream');
+    xhr.onload = function (e) {
+      setArrayBuffer(xhr.response);
+    };
+    xhr.send();
+  }, []);
 
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'diamond.glb', true);
-xhr.responseType = 'arraybuffer';
-xhr.setRequestHeader('Content-Type', 'application/octet-stream');
-xhr.onload = function (e) {
-  var arrayBuffer = xhr.response;
-  // do something with the arrayBuffer, such as passing it to GLTFLoader.parse
-  console.log(arrayBuffer)
-};
-xhr.send();
+  const [gltf, error] = useGLTFLoader('diamond.glb');
 
-
-
-  const headers = new Headers();
-  headers.append('Content-Type', 'application/octet-stream');
-  headers.append('Accept', 'application/octet-stream');
-
-  const options = { headers: headers };
-  
-
-const [gltf, error] = useLoader(GLTFLoader, 'diamond.glb', loader => {
-  loader.load('diamond.glb', gltf => {
-    // ...
-  }, undefined, error => {
-    console.error(error);
-  }, options);
-});
-  
-  
-  useMemo(() => gltf.scene.children[0].geometry.center(), [])
+useMemo(() => {
+    if (gltf) {
+      gltf.scene.children[0].geometry.center();
+    }
+  }, [gltf]);
 
   const { size, gl, scene, camera, clock } = useThree()
   const { contentMaxWidth, sectionHeight, mobile } = useBlock()
