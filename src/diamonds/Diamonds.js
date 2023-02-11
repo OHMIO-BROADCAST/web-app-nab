@@ -10,14 +10,18 @@ import state from "../store"
 
 
 const dummy = new Object3D()
-function useGLTFLoader(url) {
-  const [gltf, error] = useLoader(GLTFLoader, url);
+
+function useGLTFLoader() {
+  const headers = new Headers();
+  headers.append('Content-Type', 'application/octet-stream');
+const [gltf, error] = useLoader(GLTFLoader, 'diamond.glb', undefined, undefined, { headers });
   return [gltf, error];
 }
 
 export default function Diamonds() {
 
-const [arrayBuffer, setArrayBuffer] = useState(null);
+  const [arrayBuffer, setArrayBuffer] = useState(null);
+  
   useEffect(() => {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'diamond.glb', true);
@@ -29,7 +33,7 @@ const [arrayBuffer, setArrayBuffer] = useState(null);
     xhr.send();
   }, []);
 
-  const [gltf, error] = useGLTFLoader('diamond.glb');
+  const [gltf, error] = useGLTFLoader();
 
 useMemo(() => {
     if (gltf) {
