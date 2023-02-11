@@ -8,20 +8,25 @@ import RefractionMaterial from "./RefractionMaterial"
 import { useBlock } from "../blocks"
 import state from "../store"
 
-const modelDiamond = require('./diamond.glb')
 
 const dummy = new Object3D()
 export default function Diamonds() {
 
   const headers = new Headers();
   //headers.append('Content-Type', 'model/gltf+json');
-  headers.append('Content-Type', 'application/octet-stream');
+  headers.append('Content-Type', 'model/gltf+json');
   headers.append('Accept', 'model/gltf+json');
 
   const options = { headers: headers };
   
 
-const [gltf, error] = useLoader(GLTFLoader, modelDiamond);
+const [gltf, error] = useLoader(GLTFLoader, 'diamond.glb', loader => {
+  loader.load('diamond.glb', gltf => {
+    // ...
+  }, undefined, error => {
+    console.error(error);
+  }, options);
+});
   
   
   useMemo(() => gltf.scene.children[0].geometry.center(), [])
