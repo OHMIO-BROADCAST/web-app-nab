@@ -29,17 +29,37 @@ export default function Diamonds() {
     xhr.setRequestHeader('Content-Type', 'application/octet-stream');
     xhr.onload = function (e) {
       setArrayBuffer(xhr.response);
+      //aqui esta el modelo 3D
     };
     xhr.send();
   }, []);
 
+  const [gltfGlobal, setGLTF] = useState(null)
+
+useEffect(() => {
+  if (arrayBuffer) {
+    const loader = new GLTFLoader()
+    loader.parse(arrayBuffer, "", (gltf) => {
+      if (gltf) {
+        setGLTF(gltf)
+      }
+    })
+  }
+}, [arrayBuffer])
+  
   const [gltf, error] = useGLTFLoader();
 
 useMemo(() => {
     if (gltf) {
       gltf.scene.children[0].geometry.center();
     }
-  }, [gltf]);
+}, [gltf]);
+  
+  useMemo(() => {
+    if (gltfGlobal) {
+      gltfGlobal.scene.children[0].geometry.center();
+    }
+  }, [gltfGlobal]);
 
   const { size, gl, scene, camera, clock } = useThree()
   const { contentMaxWidth, sectionHeight, mobile } = useBlock()
