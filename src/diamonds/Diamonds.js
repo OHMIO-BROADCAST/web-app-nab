@@ -12,7 +12,9 @@ const dummy = new Object3D()
 export default function Diamonds() {
 
   const headers = new Headers();
-  headers.append('Content-Type', 'model/gltf+json');
+  //headers.append('Content-Type', 'model/gltf+json');
+  headers.append('Content-Type', 'application/octet-stream');
+
   const options = { headers: headers };
 
 const [gltf, error] = useLoader(GLTFLoader, '/diamond.glb', loader => {
